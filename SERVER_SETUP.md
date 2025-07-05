@@ -29,29 +29,6 @@ GOOGLE_SHEETS_ID=your_spreadsheet_id_here
 GOOGLE_SHEETS_RANGE=Sheet1!A1:Z1000
 ```
 
-### 4. スプレッドシートのデータ形式
-
-スプレッドシートの1行目にヘッダーを設定してください。以下の列名に対応しています：
-
-| 対応する列名（英語） | 対応する列名（日本語） | データ型 | 説明 |
-|-------------------|-------------------|---------|------|
-| name | 名前 | string | アイテム名 |
-| category | カテゴリ | string | weapon, armor, consumable |
-| price | 価格 | number | アイテムの価格 |
-| description | 説明 | string | アイテムの説明文 |
-| rarity | レアリティ | string | common, rare, epic, legendary |
-| damage | ダメージ | number | ダメージ値 |
-| defense | 防御 | number | 防御力 |
-| speed | スピード | number | スピード値 |
-| health, hp | 体力, HP | number | 体力値 |
-
-### データ例
-
-```
-name        | category  | price | description           | rarity | damage | defense | speed | health
-アイテム1    | weapon    | 1000  | 強力な武器            | rare   | 50     |         | 5     |
-アイテム2    | armor     | 1200  | 頑丈な防具            | epic   |        | 80      | -2    | 100
-```
 
 ## サーバー起動
 
