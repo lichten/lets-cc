@@ -43,3 +43,7 @@ coverage/
 
 # OS generated files
 Thumbs.db
+
+# Database files
+server/data/*.db
+server/data/*.sqlite
