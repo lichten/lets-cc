@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300">
+  <defs>
+    <linearGradient id="characterGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#4ecdc4;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#45b7d1;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Character silhouette -->
+  <!-- Head -->
+  <circle cx="100" cy="50" r="25" fill="url(#characterGradient)"/>
+  
+  <!-- Tactical helmet -->
+  <path d="M 75 35 Q 100 25 125 35 Q 125 50 100 55 Q 75 50 75 35" fill="#2c3e50" opacity="0.9"/>
+  
+  <!-- Night vision goggles -->
+  <ellipse cx="90" cy="45" rx="8" ry="6" fill="#00ff00" opacity="0.6"/>
+  <ellipse cx="110" cy="45" rx="8" ry="6" fill="#00ff00" opacity="0.6"/>
+  
+  <!-- Body -->
+  <rect x="80" y="75" width="40" height="80" fill="url(#characterGradient)" rx="5"/>
+  
+  <!-- Tactical vest -->
+  <rect x="75" y="80" width="50" height="60" fill="#34495e" opacity="0.8" rx="3"/>
+  
+  <!-- Arms -->
+  <rect x="55" y="85" width="20" height="50" fill="url(#characterGradient)" rx="10"/>
+  <rect x="125" y="85" width="20" height="50" fill="url(#characterGradient)" rx="10"/>
+  
+  <!-- Weapon in hand -->
+  <rect x="145" y="95" width="30" height="6" fill="#444" rx="3"/>
+  <rect x="170" y="97" width="15" height="2" fill="#666"/>
+  
+  <!-- Legs -->
+  <rect x="85" y="155" width="15" height="60" fill="url(#characterGradient)" rx="7"/>
+  <rect x="100" y="155" width="15" height="60" fill="url(#characterGradient)" rx="7"/>
+  
+  <!-- Boots -->
+  <rect x="82" y="210" width="20" height="15" fill="#2c3e50" rx="3"/>
+  <rect x="98" y="210" width="20" height="15" fill="#2c3e50" rx="3"/>
+  
+  <!-- Equipment pouches -->
+  <rect x="65" y="100" width="8" height="12" fill="#555" rx="2"/>
+  <rect x="127" y="100" width="8" height="12" fill="#555" rx="2"/>
+  
+  <!-- Glowing effect -->
+  <circle cx="100" cy="150" r="80" fill="none" stroke="#00ff00" stroke-width="1" opacity="0.2"/>
+  <circle cx="100" cy="150" r="60" fill="none" stroke="#4ecdc4" stroke-width="1" opacity="0.3"/>
+</svg>

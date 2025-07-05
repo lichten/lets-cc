@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="weaponGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Rifle body -->
+  <rect x="20" y="45" width="60" height="10" fill="url(#weaponGradient)" rx="2"/>
+  
+  <!-- Stock -->
+  <rect x="15" y="40" width="15" height="20" fill="url(#weaponGradient)" rx="3"/>
+  
+  <!-- Barrel -->
+  <rect x="75" y="47" width="20" height="6" fill="#444" rx="3"/>
+  
+  <!-- Scope -->
+  <rect x="40" y="40" width="20" height="8" fill="#333" rx="4"/>
+  <circle cx="50" cy="44" r="6" fill="#1a1a2e" stroke="#667eea" stroke-width="1"/>
+  
+  <!-- Trigger guard -->
+  <path d="M 35 55 Q 40 65 45 55" fill="none" stroke="url(#weaponGradient)" stroke-width="2"/>
+  
+  <!-- Magazine -->
+  <rect x="32" y="55" width="8" height="15" fill="#555" rx="2"/>
+  
+  <!-- Muzzle flash -->
+  <polygon points="95,50 105,47 108,50 105,53" fill="#ffff00" opacity="0.7"/>
+  <polygon points="105,47 115,45 117,50 112,52" fill="#ff8800" opacity="0.6"/>
+</svg>
