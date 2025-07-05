@@ -1,45 +1,73 @@
 const express = require('express');
 const { google } = require('googleapis');
+const database = require('../utils/database');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
+    const cacheKey = 'item_info';
+    const forceRefresh = req.query.refresh === 'true';
+    
+    // Try to get data from cache first (unless force refresh is requested)
+    if (!forceRefresh) {
+      const cachedData = await database.getCache(cacheKey);
+      if (cachedData) {
+        console.log('Returning cached item data');
+        return res.json(cachedData);
+      }
+    } else {
+      console.log('Force refresh requested, bypassing cache');
+    }
+
+    // If no cache, fetch from Google Sheets
     const spreadsheetId = '14V_bpBBC7S5kadzKuZh29Yvpx8Hnpw0cLShS7xwRYXY';
     const sheetName = 'アイテム';
     const range = `${sheetName}!A:S`;
     const apiKey = process.env.GOOGLE_SHEETS_API_KEY;
 
+    let items;
+
     if (!apiKey) {
       console.log('Google Sheets API key missing, using default item data');
-      return res.json(getDefaultItemData());
+      items = getDefaultItemData();
+    } else {
+      try {
+        const sheets = google.sheets({ version: 'v4', auth: apiKey });
+        
+        const response = await sheets.spreadsheets.values.get({
+          spreadsheetId: spreadsheetId,
+          range: range,
+        });
+
+        const values = response.data.values;
+        
+        if (!values || values.length === 0) {
+          console.log('No data found in spreadsheet, using default item data');
+          items = getDefaultItemData();
+        } else {
+          items = convertTsvToJson(values);
+          
+          if (items.length === 0) {
+            console.log('No valid items found in spreadsheet, using default item data');
+            items = getDefaultItemData();
+          } else {
+            console.log(`Loaded ${items.length} items from Google Sheets`);
+          }
+        }
+      } catch (sheetsError) {
+        console.error('Error fetching from Google Sheets:', sheetsError.message);
+        items = getDefaultItemData();
+      }
     }
 
-    const sheets = google.sheets({ version: 'v4', auth: apiKey });
+    // Cache the data for 60 minutes
+    await database.setCache(cacheKey, items, 60);
+    console.log('Data cached to SQLite database');
     
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: spreadsheetId,
-      range: range,
-    });
-
-    const values = response.data.values;
-    
-    if (!values || values.length === 0) {
-      console.log('No data found in spreadsheet, using default item data');
-      return res.json(getDefaultItemData());
-    }
-
-    const items = convertTsvToJson(values);
-    
-    if (items.length === 0) {
-      console.log('No valid items found in spreadsheet, using default item data');
-      return res.json(getDefaultItemData());
-    }
-
-    console.log(`Loaded ${items.length} items from Google Sheets`);
     res.json(items);
 
   } catch (error) {
-    console.error('Error fetching from Google Sheets:', error.message);
+    console.error('Error in item-info endpoint:', error.message);
     res.json(getDefaultItemData());
   }
 });
