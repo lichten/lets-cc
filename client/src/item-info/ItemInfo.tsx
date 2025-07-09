@@ -57,6 +57,7 @@ const ItemInfo = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const getItemImagePath = (category: string, name: string): string => {
+    // Viteのbase設定により、開発環境・本番環境で自動的に/ddgame/が付加される
     return `/アイテム/${category}/${name}.png`;
   };
 
@@ -79,7 +80,7 @@ const ItemInfo = () => {
     // グループ化されたデータを変換
     const groupedItems: GroupedItemData[] = [];
     
-    grouped.forEach((itemGroup, id) => {
+    grouped.forEach((itemGroup) => {
       // ability_noでソート（空文字列は最後）
       const sortedGroup = itemGroup.sort((a, b) => {
         const aNum = a.ability_no ? parseInt(a.ability_no) || 0 : 999;
@@ -128,7 +129,7 @@ const ItemInfo = () => {
   const fetchItemData = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/item-info');
+      const response = await fetch('/ddgame/api/item-info');
       if (!response.ok) {
         throw new Error('データの取得に失敗しました');
       }

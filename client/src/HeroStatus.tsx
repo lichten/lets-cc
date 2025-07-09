@@ -47,7 +47,7 @@ function HeroStatus({ onNavigateHome }: HeroStatusProps) {
   useEffect(() => {
     const fetchStatusData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/status-info');
+        const response = await fetch('/ddgame/api/status-info');
         const data = await response.json();
         setStatusData(data);
         if (data.heroes && data.heroes.length > 0) {

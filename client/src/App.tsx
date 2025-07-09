@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import HeroStatus from './HeroStatus'
 import ItemInfo from './item-info/ItemInfo'
 import './App.css'
+import heroBg from '/hero-bg.svg'
+import characterSilhouette from '/character-silhouette.svg'
+import weaponIcon from '/weapon-icon.svg'
 
 interface GameInfo {
   title: string;
@@ -18,7 +21,7 @@ function App() {
   useEffect(() => {
     const fetchGameInfo = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/game-info')
+        const response = await fetch('/ddgame/api/game-info')
         const data = await response.json()
         setGameInfo(data)
       } catch (error) {
@@ -77,11 +80,11 @@ function App() {
     <div className="app">
       <header className="hero-section">
         <div className="hero-bg">
-          <img src="/hero-bg.svg" alt="FPS Background" className="hero-background" />
+          <img src={heroBg} alt="FPS Background" className="hero-background" />
         </div>
         <div className="hero-content">
           <div className="hero-character">
-            <img src="/character-silhouette.svg" alt="Character" className="character-img" />
+            <img src={characterSilhouette} alt="Character" className="character-img" />
           </div>
           <div className="hero-text">
             <h1 className="game-title">{gameInfo?.title}</h1>
@@ -113,7 +116,7 @@ function App() {
             {gameInfo?.features.map((feature, index) => (
               <div key={index} className="feature-card">
                 <div className="feature-icon">
-                  <img src="/weapon-icon.svg" alt="Feature Icon" />
+                  <img src={weaponIcon} alt="Feature Icon" />
                 </div>
                 <h3>{feature}</h3>
               </div>
